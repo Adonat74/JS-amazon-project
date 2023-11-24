@@ -1,4 +1,4 @@
-import {cart} from "../data/cart.js";
+import {cart, addToCart} from "../data/cart.js";
 import {products} from "../data/products.js";
 
 let productsHTML = "";
@@ -57,43 +57,34 @@ products.forEach((product) => {
 });
 
 
+function updateCartQuantity() {
+    let cartQuantity = 0;
+
+    cart.forEach((item) => {
+        cartQuantity += item.quantity;
+    });
+
+    document.querySelector(".jsCartQuantity").innerHTML = cartQuantity;
+
+    document.querySelector(`.jsAdded${productId}`).classList.add("addedOpacity");
+
+    setTimeout(() => {
+        document.querySelector(`.jsAdded${productId}`).classList.remove("addedOpacity");
+    }, 2000);
+};
+
+
+
 document.querySelector(".jsProductsGrid").innerHTML = productsHTML;
 
 document.querySelectorAll(".jsAddToCart").forEach((button) => {
     button.addEventListener("click", () => {
         const productId = button.dataset.productId;
 
-        let matchingItem;
-
-        cart.forEach((item) => {
-            if (productId === item.productId) {
-                matchingItem = item;
-            }
-        });
-
-        if (matchingItem) {
-            matchingItem.quantity++;
-        } else {
-            cart.push({
-                productId: productId,
-                quantity: Number(document.querySelector(`.jsQuantitySelector${productId}`).value)
-            });
-        }
-
-        let cartQuantity = 0;
-
-        cart.forEach((item) => {
-            cartQuantity += item.quantity;
-        });
-
-        document.querySelector(".jsCartQuantity").innerHTML = cartQuantity;
-
-        document.querySelector(`.jsAdded${productId}`).classList.add("addedOpacity");
-
-        setTimeout(() => {
-            document.querySelector(`.jsAdded${productId}`).classList.remove("addedOpacity");
-        }, 2000);
+        addToCart(productId);
         
+        updateCartQuantity();
+
     });
 });
     
