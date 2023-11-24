@@ -65,12 +65,6 @@ function updateCartQuantity() {
     });
 
     document.querySelector(".jsCartQuantity").innerHTML = cartQuantity;
-
-    document.querySelector(`.jsAdded${productId}`).classList.add("addedOpacity");
-
-    setTimeout(() => {
-        document.querySelector(`.jsAdded${productId}`).classList.remove("addedOpacity");
-    }, 2000);
 };
 
 
@@ -85,6 +79,11 @@ document.querySelectorAll(".jsAddToCart").forEach((button) => {
         
         updateCartQuantity();
 
+        document.querySelector(`.jsAdded${productId}`).classList.add("addedOpacity");
+
+        setTimeout(() => {
+            document.querySelector(`.jsAdded${productId}`).classList.remove("addedOpacity");
+        }, 2000);
     });
 });
     
