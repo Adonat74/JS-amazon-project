@@ -65,11 +65,11 @@ function updateCartQuantity() {
     });
 
     document.querySelector(".jsCartQuantity").innerHTML = cartQuantity;
-};
-
+}
 
 
 document.querySelector(".jsProductsGrid").innerHTML = productsHTML;
+
 
 document.querySelectorAll(".jsAddToCart").forEach((button) => {
     button.addEventListener("click", () => {
