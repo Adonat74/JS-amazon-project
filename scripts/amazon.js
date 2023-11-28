@@ -1,4 +1,4 @@
-import {cart, addToCart} from "../data/cart.js";
+import {addToCart, calculateCartQuantity} from "../data/cart.js";
 import {products} from "../data/products.js";
 
 let productsHTML = "";
@@ -58,17 +58,16 @@ products.forEach((product) => {
 
 
 function updateCartQuantity() {
-    let cartQuantity = 0;
-
-    cart.forEach((item) => {
-        cartQuantity += item.quantity;
-    });
-
-    document.querySelector(".jsCartQuantity").innerHTML = cartQuantity;
+    document.querySelector(".jsCartQuantity").innerHTML = calculateCartQuantity();
 }
 
 
+updateCartQuantity();
+
+
+
 document.querySelector(".jsProductsGrid").innerHTML = productsHTML;
+
 
 
 document.querySelectorAll(".jsAddToCart").forEach((button) => {
@@ -76,7 +75,6 @@ document.querySelectorAll(".jsAddToCart").forEach((button) => {
         const productId = button.dataset.productId;
 
         addToCart(productId);
-        
         updateCartQuantity();
 
         document.querySelector(`.jsAdded${productId}`).classList.add("addedOpacity");
