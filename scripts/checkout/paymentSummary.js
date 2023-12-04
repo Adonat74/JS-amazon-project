@@ -1,4 +1,4 @@
-import { cart } from "../../data/cart.js";
+import { cart, calculateCartQuantity} from "../../data/cart.js";
 import { products } from '../../data/products.js';
 import { deliveryOptions } from '../../data/deliveryOptions.js';
 
@@ -33,7 +33,7 @@ export function renderPaymentSummary() {
 
     });
 
-    
+
     const totalBeforeTaxCents = productPriceCents + shippingPriceCents;
     const taxCents = totalBeforeTaxCents * 0.1;
     const totalCents = totalBeforeTaxCents + taxCents;
@@ -44,7 +44,7 @@ export function renderPaymentSummary() {
         </div>
 
         <div class="payment-summary-row">
-            <div>Items (3):</div>
+            <div>Items (${calculateCartQuantity()}):</div>
             <div class="payment-summary-money">$${(productPriceCents / 100).toFixed(2)}</div>
         </div>
 
